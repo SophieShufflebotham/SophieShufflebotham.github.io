@@ -181,15 +181,18 @@ function shakeEventDidOccur () {
             });
          }
          if (!window.DeviceMotionEvent) {
-            alert("unsupported!");
             document.getElementById('dm-unsupported').classList.remove('hidden');
          } else {
             document.getElementById('dm-info').classList.remove('hidden');
             window.addEventListener('devicemotion', function(event) {
-               alert("motion!");
-               console.log("motion!");
                document.getElementById('acceleration-x').innerHTML = Math.round(event.acceleration.x);
                document.getElementById('acceleration-y').innerHTML = Math.round(event.acceleration.y);
+               
+               if(event.acceleration > 10)
+               {
+                  alert("big ol shake");
+               }
+               
                document.getElementById('acceleration-z').innerHTML = Math.round(event.acceleration.z);
                document.getElementById('acceleration-including-gravity-x').innerHTML =
                        Math.round(event.accelerationIncludingGravity.x);
